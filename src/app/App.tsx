@@ -1,3 +1,5 @@
+import { Layout } from "components/layout";
+
 export const App = () => {
-  return <div className="App"></div>;
+  return <Layout />;
 };

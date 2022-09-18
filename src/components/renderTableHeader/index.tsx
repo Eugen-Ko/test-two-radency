@@ -1,0 +1,1 @@
+export { RenderTableHeader } from "./RenderTableHeader";
