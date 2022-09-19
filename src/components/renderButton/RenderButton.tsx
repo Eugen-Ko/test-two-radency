@@ -1,3 +1,11 @@
+import { Button } from "@mui/material";
+
 export const RenderButton = () => {
-  return <></>;
+  return (
+    <>
+      <Button variant="contained" size="small">
+        Create Note
+      </Button>
+    </>
+  );
 };
