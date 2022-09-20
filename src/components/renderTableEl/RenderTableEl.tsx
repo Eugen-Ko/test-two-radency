@@ -11,8 +11,6 @@ export const RenderTableEl = ({
   data = [""],
   lastChild = false,
 }) => {
-  console.log(!header, stat);
-
   return (
     <Box
       sx={{
@@ -26,9 +24,9 @@ export const RenderTableEl = ({
         return el.includes("SVG") ? (
           <ChoiceSVG svg={el} key={nanoid()} header={header} />
         ) : index === 5 && !header && stat === "stat" ? (
-          <StatBtn el={el} />
+          <StatBtn el={el} key={nanoid()} />
         ) : (
-          <TextInElement header={header} index={index} el={el} />
+          <TextInElement header={header} index={index} el={el} key={nanoid()} />
         );
       })}
     </Box>

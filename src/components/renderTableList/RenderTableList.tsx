@@ -3,6 +3,7 @@ import { RenderTableEl } from "components/renderTableEl";
 import todosSelectors from "redux/todo/todoSelector";
 import { useEffect, useState } from "react";
 import { createStat } from "services/createStat";
+import { nanoid } from "nanoid";
 
 export const RenderTableList = ({ stat = "" }) => {
   const records = useSelector(todosSelectors.getAllRecord);
@@ -57,6 +58,7 @@ export const RenderTableList = ({ stat = "" }) => {
             data={el}
             lastChild={index === currentList.length - 1 ? true : false}
             stat={stat}
+            key={nanoid()}
           />
         );
       })}
