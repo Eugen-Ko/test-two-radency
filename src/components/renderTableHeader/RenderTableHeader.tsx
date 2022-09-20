@@ -4,11 +4,7 @@ import { headerToDoColumn, headerStatColumn } from "assets/initData";
 export const RenderTableHeader = ({ stat = "" }) => {
   return (
     <>
-      <RenderTableEl
-        // stat
-        header
-        data={stat ? headerStatColumn : headerToDoColumn}
-      />
+      <RenderTableEl header data={stat ? headerStatColumn : headerToDoColumn} />
     </>
   );
 };
