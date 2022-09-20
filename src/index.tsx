@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import store, { persistor } from "redux/store";
+import { Toaster } from "react-hot-toast";
 import { ThemeProvider } from "@mui/material";
 import { theme } from "theme";
 import "index.css";
@@ -17,6 +18,7 @@ root.render(
       <PersistGate loading={null} persistor={persistor}>
         <ThemeProvider theme={theme}>
           <App />
+          <Toaster />
         </ThemeProvider>
       </PersistGate>
     </Provider>

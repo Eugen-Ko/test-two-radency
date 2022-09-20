@@ -7,8 +7,8 @@ export const Layout = () => {
   return (
     <>
       <RenderTable />
-      <RenderButton />
-      <RenderTable />
+      <RenderButton text="Create Note" />
+      <RenderTable stat={"stat"} />
       <ModalNewEdit />
       <ModalArch />
     </>

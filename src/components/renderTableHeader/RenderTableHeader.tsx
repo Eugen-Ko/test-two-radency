@@ -1,9 +1,14 @@
 import { RenderTableEl } from "components/renderTableEl";
+import { headerToDoColumn, headerStatColumn } from "assets/initData";
 
-export const RenderTableHeader = () => {
+export const RenderTableHeader = ({ stat = "" }) => {
   return (
     <>
-      <RenderTableEl />
+      <RenderTableEl
+        // stat
+        header
+        data={stat ? headerStatColumn : headerToDoColumn}
+      />
     </>
   );
 };

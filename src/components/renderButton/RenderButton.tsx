@@ -1,10 +1,11 @@
 import { Button } from "@mui/material";
+import { createBtn } from "styles/styledObj";
 
-export const RenderButton = () => {
+export const RenderButton = ({ text = "" }) => {
   return (
     <>
-      <Button variant="contained" size="small">
-        Create Note
+      <Button variant="contained" size="small" sx={{ ...createBtn }}>
+        {text}
       </Button>
     </>
   );
