@@ -1,8 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
-import { PersistGate } from "redux-persist/integration/react";
-import store, { persistor } from "redux/store";
+import { store } from "store/store";
 import { Toaster } from "react-hot-toast";
 import { ThemeProvider } from "@mui/material";
 import { theme } from "theme";
@@ -15,12 +14,10 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <ThemeProvider theme={theme}>
-          <App />
-          <Toaster />
-        </ThemeProvider>
-      </PersistGate>
+      <ThemeProvider theme={theme}>
+        <App />
+        <Toaster />
+      </ThemeProvider>
     </Provider>
   </React.StrictMode>
 );

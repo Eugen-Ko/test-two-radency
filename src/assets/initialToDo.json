@@ -1,0 +1,65 @@
+[
+  {
+    "name": "Shopping list",
+    "createDate": "27 April, 2022",
+    "category": "Task",
+    "content": "milk, water 03/12/2563",
+    "expDate": "",
+    "isArch": false,
+    "id": "1"
+  },
+  {
+    "name": "Shopping list",
+    "createDate": "27 April, 2022",
+    "category": "Quote",
+    "content": "milk, water",
+    "expDate": "05/05/2525",
+    "isArch": true,
+    "id": "2"
+  },
+  {
+    "name": "Shopping list",
+    "createDate": "27 April, 2022",
+    "category": "Random Thought",
+    "content": "milk, water",
+    "expDate": "",
+    "isArch": false,
+    "id": "3"
+  },
+  {
+    "name": "Shopping list",
+    "createDate": "27 April, 2022",
+    "category": "Task",
+    "content": "milk, water",
+    "expDate": "",
+    "isArch": true,
+    "id": "4"
+  },
+  {
+    "name": "Shopping list",
+    "createDate": "27 April, 2022",
+    "category": "Quote",
+    "content": "milk, water",
+    "expDate": "",
+    "isArch": false,
+    "id": "5"
+  },
+  {
+    "name": "Shopping list",
+    "createDate": "27 April, 2022",
+    "category": "Idea",
+    "content": "milk, water",
+    "expDate": "",
+    "isArch": false,
+    "id": "6"
+  },
+  {
+    "name": "Shopping list",
+    "createDate": "27 April, 2022",
+    "category": "Task",
+    "content": "milk, water 2/5/2022 and 3/1/2022",
+    "expDate": "",
+    "isArch": false,
+    "id": "7"
+  }
+]
