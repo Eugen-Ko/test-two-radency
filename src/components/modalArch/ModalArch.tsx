@@ -15,8 +15,7 @@ import { RenderTableEl } from "components/renderTableEl";
 import { nanoid } from "nanoid";
 
 export const ModalArch = () => {
-  const { triggerModalArch, setCurrentCat, elementEdit, setCurrentEl } =
-    useActions();
+  const { triggerModalArch, setCurrentCat } = useActions();
 
   const currentCat = useAppSelector((state) => state.todo.currentCat || null);
 
@@ -57,7 +56,6 @@ export const ModalArch = () => {
               );
             })}
           </Box>
-
           <Box
             sx={{
               mt: "20px",

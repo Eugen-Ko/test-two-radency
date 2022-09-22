@@ -14,7 +14,7 @@ import { styleModalNewEdit } from "styles/styledObj";
 export const ModalNewEdit = () => {
   const { triggerModalNewEdit, addNewRecord, elementEdit, setCurrentEl } =
     useActions();
-  const currentEl = useAppSelector((state) => state.todo.currentEl || null);
+  const currentEl = useAppSelector((state) => state.todo.currentEl);
   const [open, setOpen] = useState(
     useAppSelector((state) => state.todo.isNewEdit)
   );

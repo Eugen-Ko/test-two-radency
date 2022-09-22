@@ -36,7 +36,6 @@ export const ChoiceSVG = ({ svg = "", header = false, id = "" }): any => {
       allArch();
       return;
     }
-    console.log(id, "id");
     elementArch(id);
   };
 

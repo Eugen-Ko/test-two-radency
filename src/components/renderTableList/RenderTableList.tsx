@@ -4,7 +4,6 @@ import { useRenderTableList } from "hooks/hooks";
 
 export const RenderTableList = ({ typeTab = "" }) => {
   const currentList = useRenderTableList(typeTab);
-
   return (
     <>
       {currentList.map((data, index) => {

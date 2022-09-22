@@ -2,7 +2,6 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
 import { store } from "store/store";
-import { Toaster } from "react-hot-toast";
 import { ThemeProvider } from "@mui/material";
 import { theme } from "theme";
 import "index.css";
@@ -16,7 +15,6 @@ root.render(
     <Provider store={store}>
       <ThemeProvider theme={theme}>
         <App />
-        <Toaster />
       </ThemeProvider>
     </Provider>
   </React.StrictMode>
