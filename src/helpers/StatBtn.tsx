@@ -1,7 +1,7 @@
 import { Button } from "@mui/material";
 import { createBtnStat } from "styles/styledObj";
 
-export const StatBtn = ({ el = "" }) => {
+export const StatBtn = ({ el = "", id = "" }) => {
   return (
     <Button
       variant="contained"

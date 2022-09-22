@@ -1,10 +1,14 @@
 import { RenderTableEl } from "components/renderTableEl";
-import { headerToDoColumn, headerStatColumn } from "assets/initData";
+import { headerTodo, headerStat } from "assets/initData";
 
-export const RenderTableHeader = ({ stat = "" }) => {
+export const RenderTableHeader = ({ typeTab = "" }) => {
   return (
     <>
-      <RenderTableEl header data={stat ? headerStatColumn : headerToDoColumn} />
+      <RenderTableEl
+        header
+        lastEl
+        data={typeTab === "todo" ? headerTodo : headerStat}
+      />
     </>
   );
 };

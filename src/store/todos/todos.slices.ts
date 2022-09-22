@@ -1,30 +1,55 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { KEY_LS } from "assets/initData";
 import { ToDoRecord } from "assets/interfaces";
 import { init } from "services/init";
 
 interface TodosState {
   todos: ToDoRecord[];
   isNewEdit: boolean;
-  isArchived: boolean;
+  isArch: boolean;
+  currentEl: ToDoRecord | null;
 }
 
 const initialState: TodosState = {
   todos: init(),
   isNewEdit: false,
-  isArchived: false,
+  isArch: false,
+  currentEl: null,
 };
-
-init();
 
 export const todoSlice = createSlice({
   name: "todo",
   initialState,
   reducers: {
-    fetchTodo(state, action: PayloadAction<ToDoRecord>) {
-      console.log(state);
+    allArch(state) {
+      state.todos = state.todos.map((el) => {
+        return { ...el, isArch: true };
+      });
+      localStorage.setItem(KEY_LS, JSON.stringify(state.todos));
     },
-    // addTodo(state, action: PayloadAction<ToDoRecord>) {
-    //   state.todos.push(action.payload);
+    allActiveDel(state) {
+      state.todos = state.todos.filter((el) => el.isArch);
+      localStorage.setItem(KEY_LS, JSON.stringify(state.todos));
+    },
+    elementArch(state, action: PayloadAction<string>) {
+      state.todos = state.todos.map((el) => {
+        if (el.id === action.payload) {
+          return { ...el, isArch: true };
+        }
+        return el;
+      });
+      localStorage.setItem(KEY_LS, JSON.stringify(state.todos));
+    },
+    elementDel(state, action: PayloadAction<string>) {
+      state.todos = state.todos.filter((el) => el.id !== action.payload);
+      localStorage.setItem(KEY_LS, JSON.stringify(state.todos));
+    },
+    triggerModalNewEdit(state) {
+      state.isNewEdit = !state.isNewEdit;
+    },
+    // archTodo(state, action: PayloadAction<ToDoRecord>) {
+    //   state.todos = [action.payload];
+    // },
     //   localStorage.setItem(KEY_LS, JSON.stringify(state.todos));
     // },
     // removeTodo(state, action: PayloadAction<ToDoRecord>) {
@@ -33,8 +58,6 @@ export const todoSlice = createSlice({
     // },
   },
 });
-
-console.log(todoSlice.caseReducers.fetchTodo);
 
 export const todosActions = todoSlice.actions;
 export const todosReducer = todoSlice.reducer;

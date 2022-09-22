@@ -3,12 +3,12 @@ import { RenderTableList } from "components/renderTableList";
 import { Box } from "@mui/system";
 import { tableListToDo, tableListStat } from "styles/styledObj";
 
-export const RenderTable = ({ stat = "" }) => {
+export const RenderTable = ({ typeTab = "" }) => {
   return (
     <>
-      <RenderTableHeader stat={stat} />
-      <Box sx={{ ...(stat === "" ? tableListToDo : tableListStat) }}>
-        <RenderTableList stat={stat} />
+      {typeTab !== "arch" && <RenderTableHeader typeTab={typeTab} />}
+      <Box sx={{ ...(typeTab === "todo" ? tableListToDo : tableListStat) }}>
+        <RenderTableList typeTab={typeTab} />
       </Box>
     </>
   );

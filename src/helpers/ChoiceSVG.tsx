@@ -9,22 +9,47 @@ import EditIcon from "@mui/icons-material/Edit";
 import { Box, IconButton } from "@mui/material";
 import { headerSVG, listSVG, categorySVG } from "styles/styledObj";
 import { theme } from "theme";
+import { useActions } from "hooks/action";
 
-export const ChoiceSVG = ({ svg = "", header = false }): any => {
+export const ChoiceSVG = ({ svg = "", header = false, id = "" }): any => {
   const { secondary } = theme.palette;
+  const { allArch, allActiveDel, elementArch, elementDel } = useActions();
+
+  const onClickEdit = (e: React.MouseEvent<HTMLButtonElement>, id: string) => {
+    console.log(id);
+  };
+
+  const onClickArh = (e: React.MouseEvent<HTMLButtonElement>, id: string) => {
+    if (id === "headerTodo") {
+      allArch();
+      return;
+    }
+    console.log(id, "id");
+    elementArch(id);
+  };
+
+  const onClickDel = (e: React.MouseEvent<HTMLButtonElement>, id: string) => {
+    if (id === "headerTodo") {
+      allActiveDel();
+      return;
+    }
+    elementDel(id);
+  };
+
   switch (svg) {
     case "archiveSVG":
       return (
         <IconButton
           sx={{ ...(header ? headerSVG : listSVG) }}
-          aria-label="delete"
+          aria-label="archive"
+          onClick={(e) => onClickArh(e, id)}
         >
           <ArchiveIcon />
         </IconButton>
       );
     case "unArchiveSVG":
       return (
-        <IconButton aria-label="delete">
+        <IconButton aria-label="unArchive">
           <UnarchiveIcon sx={{ ...listSVG }} />
         </IconButton>
       );
@@ -33,13 +58,18 @@ export const ChoiceSVG = ({ svg = "", header = false }): any => {
         <IconButton
           sx={{ ...(header ? headerSVG : listSVG) }}
           aria-label="delete"
+          onClick={(e) => onClickDel(e, id)}
         >
           <DeleteIcon />
         </IconButton>
       );
     case "editSVG":
       return (
-        <IconButton sx={{ ...listSVG }} aria-label="delete">
+        <IconButton
+          sx={{ ...listSVG }}
+          aria-label="edit"
+          onClick={(e) => onClickEdit(e, id)}
+        >
           <EditIcon />
         </IconButton>
       );

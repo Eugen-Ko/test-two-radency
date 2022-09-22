@@ -10,6 +10,7 @@ export interface ToDoRecord {
 
 export interface State {
   todos: ToDoRecord[];
-  isModalNewEdit: boolean;
-  isModalArch: boolean;
+  isNewEdit: boolean;
+  isArch: boolean;
+  currentEl: ToDoRecord;
 }

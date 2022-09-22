@@ -6,25 +6,25 @@ import { StatBtn } from "helpers/StatBtn";
 import { TextInElement } from "helpers/TextInElement";
 
 export const RenderTableEl = ({
-  stat = "",
   header = false,
-  data = [""],
-  lastChild = false,
+  lastEl = false,
+  typeTab = "",
+  data = { data: [""], id: "" },
 }) => {
   return (
     <Box
       sx={{
         ...tableElement,
         ...(header ? headerStyle : elStyle),
-        marginBottom: lastChild ? "0" : "10px",
+        marginBottom: lastEl ? "0" : "10px",
       }}
       key={nanoid()}
     >
-      {data.map((el, index) => {
+      {data?.data.map((el, index) => {
         return el.includes("SVG") ? (
-          <ChoiceSVG svg={el} key={nanoid()} header={header} />
-        ) : index === 5 && !header && stat === "stat" ? (
-          <StatBtn el={el} key={nanoid()} />
+          <ChoiceSVG svg={el} key={nanoid()} header={header} id={data.id} />
+        ) : index === 5 && !header && typeTab === "stat" ? (
+          <StatBtn el={el} key={nanoid()} id={data.id} />
         ) : (
           <TextInElement header={header} index={index} el={el} key={nanoid()} />
         );
