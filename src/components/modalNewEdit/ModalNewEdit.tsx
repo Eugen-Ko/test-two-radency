@@ -6,31 +6,32 @@ import { useAppSelector } from "hooks/redux";
 import { categories } from "assets/initData";
 import { MenuItem, TextField } from "@mui/material";
 import { useActions } from "hooks/action";
-import { useState } from "react";
-
-const styleModalNewEdit = {
-  position: "absolute" as "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "background.paper",
-  borderRadius: "5px",
-  boxShadow: 24,
-  p: 4,
-  display: "flex",
-  flexDirection: "column",
-};
+import React, { useState } from "react";
+import { nanoid } from "nanoid";
+import { checkExpDate } from "services/checkExpDate";
+import { styleModalNewEdit } from "styles/styledObj";
 
 export const ModalNewEdit = () => {
-  const { triggerModalNewEdit } = useActions();
-  const currentEl = useAppSelector((state) => state.todo.currentEl);
+  const { triggerModalNewEdit, addNewRecord } = useActions();
+  const currentEl = useAppSelector((state) => state.todo.currentEl || null);
   const [open, setOpen] = useState(
     useAppSelector((state) => state.todo.isNewEdit)
   );
-
+  const [currentName, setCurrentName] = useState(
+    currentEl ? currentEl.name : ""
+  );
   const [currentCategory, setCurrentCategory] = useState(
     currentEl ? currentEl.category : categories[0]
+  );
+  const [currentContent, setCurrentContent] = useState(
+    currentEl ? currentEl.content : ""
+  );
+  const [currentDate, setCurrentDate] = useState(
+    currentEl
+      ? currentEl.expDate
+        ? currentEl.expDate
+        : checkExpDate(currentEl.content)
+      : ""
   );
 
   const handleClose = () => {
@@ -38,8 +39,44 @@ export const ModalNewEdit = () => {
     triggerModalNewEdit();
   };
 
+  const onClickSave = () => {
+    const createRecord = {
+      name: currentName,
+      createDate: currentEl
+        ? currentEl.createDate
+        : new Date().toLocaleString("en-US", {
+            day: "numeric",
+            month: "long",
+            year: "numeric",
+          }),
+      category: currentCategory,
+      content: currentContent,
+      expDate: currentDate,
+      isArch: false,
+      id: currentEl ? currentEl.id : nanoid(),
+    };
+
+    if (!currentEl) addNewRecord(createRecord);
+    handleClose();
+  };
+
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setCurrentCategory(event.target.value);
+    switch (event.target.name) {
+      case "name":
+        setCurrentName(event.target.value);
+        break;
+      case "category":
+        setCurrentCategory(event.target.value);
+        break;
+
+      case "content":
+        setCurrentContent(event.target.value);
+        break;
+
+      case "expDate":
+        setCurrentDate(event.target.value);
+        break;
+    }
   };
 
   return (
@@ -54,18 +91,22 @@ export const ModalNewEdit = () => {
           <Typography component="h2">
             {currentEl ? "Edit record" : "New record"}
           </Typography>
+
           <TextField
             InputLabelProps={{ style: { color: "grey" } }}
             inputProps={{
               style: { color: "#212121" },
             }}
+            name="name"
             label="Name"
-            defaultValue={currentEl ? currentEl.name : ""}
+            defaultValue={currentName}
             variant="standard"
             sx={{ marginBottom: "10px" }}
+            onChange={handleChange}
           />
           <TextField
             id="standard-select-currency"
+            name="category"
             select
             label="Select"
             value={currentCategory}
@@ -84,20 +125,28 @@ export const ModalNewEdit = () => {
             ))}
           </TextField>
           <TextField
+            name="content"
             label="Content"
             variant="standard"
-            defaultValue={currentEl ? currentEl.content : ""}
+            defaultValue={currentContent}
+            onChange={handleChange}
           />
           <TextField
+            name="expDate"
             label="Dates"
             variant="standard"
-            defaultValue={currentEl ? currentEl.expDate : ""}
+            defaultValue={currentDate}
+            onChange={handleChange}
           />
           <Box
-            sx={{ mt: "20px", display: "flex", justifyContent: "space-around" }}
+            sx={{
+              mt: "20px",
+              display: "flex",
+              justifyContent: "space-around",
+            }}
           >
-            <RenderButton text="Cancel" />
-            <RenderButton text="Save" />
+            <RenderButton onClick={handleClose} text="Cancel" />
+            <RenderButton onClick={onClickSave} text="Save" />
           </Box>
         </Box>
       </Modal>

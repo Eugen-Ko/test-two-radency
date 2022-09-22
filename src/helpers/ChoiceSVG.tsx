@@ -10,13 +10,24 @@ import { Box, IconButton } from "@mui/material";
 import { headerSVG, listSVG, categorySVG } from "styles/styledObj";
 import { theme } from "theme";
 import { useActions } from "hooks/action";
+import { useAppSelector } from "hooks/redux";
 
 export const ChoiceSVG = ({ svg = "", header = false, id = "" }): any => {
   const { secondary } = theme.palette;
-  const { allArch, allActiveDel, elementArch, elementDel } = useActions();
+  const {
+    allArch,
+    allActiveDel,
+    elementArch,
+    elementDel,
+    elementEdit,
+    triggerModalNewEdit,
+  } = useActions();
+  const records = useAppSelector((state) => state.todo.todos);
 
   const onClickEdit = (e: React.MouseEvent<HTMLButtonElement>, id: string) => {
-    console.log(id);
+    const currentRecord = records.find((record) => record.id === id) || null;
+    elementEdit(currentRecord);
+    triggerModalNewEdit();
   };
 
   const onClickArh = (e: React.MouseEvent<HTMLButtonElement>, id: string) => {

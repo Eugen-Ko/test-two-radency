@@ -1,6 +1,7 @@
 import { createStat } from "services/createStat";
 import { useAppSelector } from "hooks/redux";
 import { useState, useEffect } from "react";
+import { checkExpDate } from "services/checkExpDate";
 
 interface Element {
   data: string[];
@@ -24,7 +25,7 @@ export const useRenderTableList = (typeTab = "") => {
                 el.createDate,
                 el.category,
                 el.content,
-                el.expDate,
+                el.expDate ? el.expDate : checkExpDate(el.content),
                 "editSVG",
                 "archiveSVG",
                 "deleteSVG",

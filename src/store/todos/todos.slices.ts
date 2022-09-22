@@ -31,6 +31,9 @@ export const todoSlice = createSlice({
       state.todos = state.todos.filter((el) => el.isArch);
       localStorage.setItem(KEY_LS, JSON.stringify(state.todos));
     },
+    elementEdit(state, action: PayloadAction<ToDoRecord | null>) {
+      state.currentEl = action.payload;
+    },
     elementArch(state, action: PayloadAction<string>) {
       state.todos = state.todos.map((el) => {
         if (el.id === action.payload) {
@@ -46,6 +49,10 @@ export const todoSlice = createSlice({
     },
     triggerModalNewEdit(state) {
       state.isNewEdit = !state.isNewEdit;
+    },
+    addNewRecord(state, action: PayloadAction<ToDoRecord>) {
+      state.todos.push(action.payload);
+      localStorage.setItem(KEY_LS, JSON.stringify(state.todos));
     },
     // archTodo(state, action: PayloadAction<ToDoRecord>) {
     //   state.todos = [action.payload];

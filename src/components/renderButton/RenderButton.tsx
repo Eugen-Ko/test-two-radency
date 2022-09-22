@@ -8,6 +8,7 @@ export const RenderButton = ({
   return (
     <>
       <Button
+        type={text === "Save" ? "submit" : "button"}
         variant="contained"
         size="small"
         sx={{ ...createBtn }}
