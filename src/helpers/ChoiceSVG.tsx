@@ -19,14 +19,15 @@ export const ChoiceSVG = ({ svg = "", header = false, id = "" }): any => {
     allActiveDel,
     elementArch,
     elementDel,
-    elementEdit,
+    elementUnArch,
+    setCurrentEl,
     triggerModalNewEdit,
   } = useActions();
   const records = useAppSelector((state) => state.todo.todos);
 
   const onClickEdit = (e: React.MouseEvent<HTMLButtonElement>, id: string) => {
     const currentRecord = records.find((record) => record.id === id) || null;
-    elementEdit(currentRecord);
+    setCurrentEl(currentRecord);
     triggerModalNewEdit();
   };
 
@@ -47,6 +48,11 @@ export const ChoiceSVG = ({ svg = "", header = false, id = "" }): any => {
     elementDel(id);
   };
 
+  const onClickUnArh = (e: React.MouseEvent<HTMLButtonElement>, id: string) => {
+    console.log(id, "id");
+    elementUnArch(id);
+  };
+
   switch (svg) {
     case "archiveSVG":
       return (
@@ -60,8 +66,12 @@ export const ChoiceSVG = ({ svg = "", header = false, id = "" }): any => {
       );
     case "unArchiveSVG":
       return (
-        <IconButton aria-label="unArchive">
-          <UnarchiveIcon sx={{ ...listSVG }} />
+        <IconButton
+          sx={{ ...listSVG }}
+          aria-label="unArchive"
+          onClick={(e) => onClickUnArh(e, id)}
+        >
+          <UnarchiveIcon />
         </IconButton>
       );
     case "deleteSVG":

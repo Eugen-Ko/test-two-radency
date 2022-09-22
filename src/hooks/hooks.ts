@@ -10,6 +10,7 @@ interface Element {
 
 export const useRenderTableList = (typeTab = "") => {
   const records = useAppSelector((state) => state.todo.todos);
+  const currenCat = useAppSelector((state) => state.todo.currentCat);
   const [currentList, setCurrentList] = useState<Array<Element>>([]);
 
   useEffect(() => {
@@ -54,8 +55,29 @@ export const useRenderTableList = (typeTab = "") => {
         });
         setCurrentList(resStat);
         break;
+      case "arch":
+        const resArch = records
+          .filter((el) => el.isArch && el.category === currenCat)
+          .map((el) => {
+            return {
+              data: [
+                el.category + "SVG",
+                el.name,
+                el.createDate,
+                el.category,
+                el.content,
+                el.expDate ? el.expDate : checkExpDate(el.content),
+                "",
+                "",
+                "unArchiveSVG",
+              ],
+              id: el.id,
+            };
+          });
+        setCurrentList(resArch);
+        break;
     }
-  }, [records, typeTab]);
+  }, [currenCat, records, typeTab]);
 
   return currentList;
 };

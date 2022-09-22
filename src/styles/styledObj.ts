@@ -110,3 +110,7 @@ export const styleModalNewEdit = {
   display: "flex",
   flexDirection: "column",
 };
+
+export const styleModalArch = {
+  width: "80%",
+};

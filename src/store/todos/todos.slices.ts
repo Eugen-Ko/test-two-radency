@@ -8,6 +8,7 @@ interface TodosState {
   isNewEdit: boolean;
   isArch: boolean;
   currentEl: ToDoRecord | null;
+  currentCat: string | null;
 }
 
 const initialState: TodosState = {
@@ -15,6 +16,7 @@ const initialState: TodosState = {
   isNewEdit: false,
   isArch: false,
   currentEl: null,
+  currentCat: null,
 };
 
 export const todoSlice = createSlice({
@@ -31,8 +33,11 @@ export const todoSlice = createSlice({
       state.todos = state.todos.filter((el) => el.isArch);
       localStorage.setItem(KEY_LS, JSON.stringify(state.todos));
     },
-    elementEdit(state, action: PayloadAction<ToDoRecord | null>) {
-      state.currentEl = action.payload;
+    elementEdit(state, action: PayloadAction<ToDoRecord>) {
+      state.todos = state.todos.map((el) => {
+        return el.id === action.payload.id ? action.payload : el;
+      });
+      localStorage.setItem(KEY_LS, JSON.stringify(state.todos));
     },
     elementArch(state, action: PayloadAction<string>) {
       state.todos = state.todos.map((el) => {
@@ -54,15 +59,24 @@ export const todoSlice = createSlice({
       state.todos.push(action.payload);
       localStorage.setItem(KEY_LS, JSON.stringify(state.todos));
     },
-    // archTodo(state, action: PayloadAction<ToDoRecord>) {
-    //   state.todos = [action.payload];
-    // },
-    //   localStorage.setItem(KEY_LS, JSON.stringify(state.todos));
-    // },
-    // removeTodo(state, action: PayloadAction<ToDoRecord>) {
-    //   state.todos = state.todos.filter((f) => f !== action.payload);
-    //   localStorage.setItem(KEY_LS, JSON.stringify(state.todos));
-    // },
+    setCurrentEl(state, action: PayloadAction<ToDoRecord | null>) {
+      state.currentEl = action.payload;
+    },
+    triggerModalArch(state) {
+      state.isArch = !state.isArch;
+    },
+    setCurrentCat(state, action: PayloadAction<string | null>) {
+      state.currentCat = action.payload;
+    },
+    elementUnArch(state, action: PayloadAction<string>) {
+      state.todos = state.todos.map((el) => {
+        if (el.id === action.payload) {
+          return { ...el, isArch: false };
+        }
+        return el;
+      });
+      localStorage.setItem(KEY_LS, JSON.stringify(state.todos));
+    },
   },
 });
 

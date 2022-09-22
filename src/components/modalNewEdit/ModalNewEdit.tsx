@@ -12,7 +12,8 @@ import { checkExpDate } from "services/checkExpDate";
 import { styleModalNewEdit } from "styles/styledObj";
 
 export const ModalNewEdit = () => {
-  const { triggerModalNewEdit, addNewRecord } = useActions();
+  const { triggerModalNewEdit, addNewRecord, elementEdit, setCurrentEl } =
+    useActions();
   const currentEl = useAppSelector((state) => state.todo.currentEl || null);
   const [open, setOpen] = useState(
     useAppSelector((state) => state.todo.isNewEdit)
@@ -37,6 +38,7 @@ export const ModalNewEdit = () => {
   const handleClose = () => {
     setOpen(false);
     triggerModalNewEdit();
+    setCurrentEl(null);
   };
 
   const onClickSave = () => {
@@ -55,8 +57,8 @@ export const ModalNewEdit = () => {
       isArch: false,
       id: currentEl ? currentEl.id : nanoid(),
     };
-
     if (!currentEl) addNewRecord(createRecord);
+    else elementEdit(createRecord);
     handleClose();
   };
 
@@ -68,11 +70,9 @@ export const ModalNewEdit = () => {
       case "category":
         setCurrentCategory(event.target.value);
         break;
-
       case "content":
         setCurrentContent(event.target.value);
         break;
-
       case "expDate":
         setCurrentDate(event.target.value);
         break;
