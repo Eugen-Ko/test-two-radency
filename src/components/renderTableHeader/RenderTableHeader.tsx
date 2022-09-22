@@ -6,7 +6,6 @@ export const RenderTableHeader = ({ typeTab = "" }) => {
     <>
       <RenderTableEl
         header
-        lastEl
         data={typeTab === "todo" ? headerTodo : headerStat}
       />
     </>
