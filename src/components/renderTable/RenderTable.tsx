@@ -1,7 +1,5 @@
 import { RenderTableHeader } from "components/renderTableHeader";
 import { RenderTableList } from "components/renderTableList";
-// import { Box } from "@mui/system";
-// import { tableListToDo, tableListStat } from "styles/styledObj";
 
 export const RenderTable = ({ typeTab = "" }) => {
   return (
@@ -19,14 +17,3 @@ export const RenderTable = ({ typeTab = "" }) => {
     </div>
   );
 };
-
-// export const tableListToDo = {
-//   height: "290px",
-//   marginBottom: "20px",
-//   overflow: "hidden",
-//   overflowY: "auto",
-// };
-
-// export const tableListStat = {
-//   height: "230px",
-// };

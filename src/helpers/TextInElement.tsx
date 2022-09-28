@@ -1,6 +1,4 @@
 import { nanoid } from "nanoid";
-// import { Typography } from "@mui/material";
-// import { headerText, listSVG, listTitle } from "styles/styledObj";
 
 export const TextInElement = ({ header = false, index = 0, el = "" }) => {
   const overflow = "overflow-hidden whitespace-nowrap text-ellipsis";
@@ -19,28 +17,3 @@ export const TextInElement = ({ header = false, index = 0, el = "" }) => {
     </p>
   );
 };
-
-// export const headerText = {
-//   color: `${secondary.light}`,
-//   fontWeight: "bold",
-//   overflow: "hidden",
-//   whiteSpace: "nowrap",
-//   textOverflow: "ellipsis",
-// };
-
-// const list = {
-//   fontSize: "14px",
-//   overflow: "hidden",
-//   whiteSpace: "nowrap",
-//   textOverflow: "ellipsis",
-// };
-
-// export const listSVG = {
-//   ...list,
-//   color: `${primary.dark}`,
-// };
-
-// export const listTitle = {
-//   ...list,
-//   color: `${secondary.main}`,
-// };

@@ -24,12 +24,14 @@ export const Layout = () => {
   return (
     <>
       <RenderTable typeTab="todo" />
-      <RenderButton
-        onClick={() => {
-          triggerModalNewEdit();
-        }}
-        text="Create Note"
-      />
+      <div className="flex justify-end mt-[30px]">
+        <RenderButton
+          onClick={() => {
+            triggerModalNewEdit();
+          }}
+          text="Create Note"
+        />
+      </div>
       <RenderTable typeTab="stat" />
       {isModalNewEdit && <ModalNewEdit />}
       {isModalArch && <ModalArch />}

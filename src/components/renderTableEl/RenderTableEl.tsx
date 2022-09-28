@@ -1,5 +1,3 @@
-// import { Box } from "@mui/material";
-// import { tableElement, headerStyle, elStyle } from "styles/styledObj";
 import { ChoiceSVG } from "helpers/ChoiceSVG";
 import { nanoid } from "nanoid";
 import { StatBtn } from "helpers/StatBtn";
@@ -36,26 +34,3 @@ export const RenderTableEl = ({
     </div>
   );
 };
-
-// export const tableElement = {
-//   width: "calc(100% - 24px)",
-//   height: "40px",
-//   padding: "5px 12px",
-//   margin: "0px auto 10px auto",
-//   display: "grid",
-//   gridTemplateColumns: "40px 3fr 2fr 2fr 3fr 2fr 40px 40px 40px",
-//   gridTemplateRows: "40px",
-//   columnGap: "12px",
-//   alignItems: "center",
-// };
-
-// export const headerStyle = {
-//   marginTop: "40px",
-//   boxShadow: "0 0 5px rgba(0, 0, 0, 0.2) inset",
-//   borderRadius: "5px",
-//   backgroundColor: `${primary.dark}`,
-// };
-
-// export const elStyle = {
-//   backgroundColor: `${primary.light}`,
-// };
