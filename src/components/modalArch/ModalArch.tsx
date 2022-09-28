@@ -8,7 +8,7 @@ import { useState } from "react";
 import {
   styleModalArch,
   styleModalNewEdit,
-  tableListToDo,
+  // tableListToDo,
 } from "styles/styledObj";
 import { useRenderTableList } from "hooks/hooks";
 import { RenderTableEl } from "components/renderTableEl";
@@ -43,7 +43,7 @@ export const ModalArch = () => {
           <Typography component="h2">
             Archived records by {`${currentCat}`}
           </Typography>
-          <Box sx={{ ...tableListToDo, margin: "15px 0 10px 0" }}>
+          {/* <Box sx={{ ...tableListToDo, margin: "15px 0 10px 0" }}>
             {currentList.map((data, index) => {
               return (
                 <RenderTableEl
@@ -55,7 +55,7 @@ export const ModalArch = () => {
                 />
               );
             })}
-          </Box>
+          </Box> */}
           <Box
             sx={{
               mt: "20px",
