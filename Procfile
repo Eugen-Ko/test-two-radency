@@ -1,1 +1,1 @@
-web: node server.js
+web: start-storybook -p 6006 -s public

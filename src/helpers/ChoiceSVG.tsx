@@ -66,10 +66,10 @@ export const ChoiceSVG = ({
   };
 
   const styleSVG =
-    "h-[40px] rounded-[50%] items-center shadow-md transition-all flex item-center justify-center";
-  const headerSVG = "fill-white";
+    "w-[40px] h-[40px] rounded-[50%] items-center shadow-md transition-all flex item-center justify-center";
+  const headerSVG = "bg-dark fill-white";
   const hoverHeaderSVG = "hover:bg-white hover:fill-dark";
-  const listSVG = "fill-dark";
+  const listSVG = "bg-light fill-dark";
   const hoverListSVG = "hover:bg-dark hover:fill-white";
 
   if (["archiveSVG", "unArchiveSVG", "deleteSVG", "editSVG"].includes(svg)) {

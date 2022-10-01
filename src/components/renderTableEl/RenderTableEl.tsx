@@ -9,6 +9,7 @@ export const RenderTableEl = ({
   data = { data: [""], id: "" },
 }) => {
   return (
+    // <button>Title</button>
     <div
       className={header ? "shadow rounded-md bg-dark text-white" : "bg-light"}
     >
