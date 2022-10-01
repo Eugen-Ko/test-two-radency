@@ -1,13 +1,11 @@
 import { Layout } from "components/layout";
-import { Box } from "@mui/material";
-import { mainContainer } from "styles/styledObj";
 import { init } from "services/init";
 
 export const App = () => {
   init();
   return (
-    <Box sx={{ ...mainContainer }}>
+    <div className="container max-w-5xl flex flex-col overflow-hidden">
       <Layout />
-    </Box>
+    </div>
   );
 };

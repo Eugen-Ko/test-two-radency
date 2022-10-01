@@ -11,7 +11,7 @@ export const RenderTableList = ({ typeTab = "" }) => {
           <RenderTableEl
             header={false}
             data={data}
-            lastEl={index === currentList.length - 1 ? true : false}
+            // lastEl={index === currentList.length - 1 ? true : false}
             typeTab={typeTab}
             key={nanoid()}
           />

@@ -1,15 +1,11 @@
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import Modal from "@mui/material/Modal";
-import { RenderButton } from "components/renderButton";
 import { useAppSelector } from "hooks/redux";
 import { categories } from "assets/initData";
-import { MenuItem, TextField } from "@mui/material";
 import { useActions } from "hooks/action";
-import React, { useState } from "react";
+import React, { Fragment, useState } from "react";
 import { nanoid } from "nanoid";
 import { checkExpDate } from "services/checkExpDate";
-import { styleModalNewEdit } from "styles/styledObj";
+import { Transition, Dialog } from "@headlessui/react";
+import { RenderButton } from "components/renderButton";
 
 export const ModalNewEdit = () => {
   const { triggerModalNewEdit, addNewRecord, elementEdit, setCurrentEl } =
@@ -67,9 +63,6 @@ export const ModalNewEdit = () => {
       case "name":
         setCurrentName(event.target.value);
         break;
-      case "category":
-        setCurrentCategory(event.target.value);
-        break;
       case "content":
         setCurrentContent(event.target.value);
         break;
@@ -79,77 +72,82 @@ export const ModalNewEdit = () => {
     }
   };
 
-  return (
-    <>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={{ ...styleModalNewEdit }}>
-          <Typography component="h2">
-            {currentEl ? "Edit record" : "New record"}
-          </Typography>
+  const handlerSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setCurrentCategory(event.target.value);
+  };
 
-          <TextField
-            InputLabelProps={{ style: { color: "grey" } }}
-            inputProps={{
-              style: { color: "#212121" },
-            }}
-            name="name"
-            label="Name"
-            defaultValue={currentName}
-            variant="standard"
-            sx={{ marginBottom: "10px" }}
-            onChange={handleChange}
-          />
-          <TextField
-            id="standard-select-currency"
-            name="category"
-            select
-            label="Select"
-            value={currentCategory}
-            helperText="Please select category"
-            variant="standard"
-            onChange={handleChange}
-            InputLabelProps={{ style: { color: "grey" } }}
-            inputProps={{
-              style: { color: "#212121" },
-            }}
-          >
-            {categories.map((option) => (
-              <MenuItem key={option} value={option}>
-                {option}
-              </MenuItem>
-            ))}
-          </TextField>
-          <TextField
-            name="content"
-            label="Content"
-            variant="standard"
-            defaultValue={currentContent}
-            onChange={handleChange}
-          />
-          <TextField
-            name="expDate"
-            label="Dates"
-            variant="standard"
-            defaultValue={currentDate}
-            onChange={handleChange}
-          />
-          <Box
-            sx={{
-              mt: "20px",
-              display: "flex",
-              justifyContent: "space-around",
-            }}
-          >
-            <RenderButton onClick={handleClose} text="Cancel" />
-            <RenderButton onClick={onClickSave} text="Save" />
-          </Box>
-        </Box>
-      </Modal>
-    </>
+  return (
+    <Transition.Root show={open} as={Fragment}>
+      <Dialog
+        as="div"
+        className="relative z-10 bg-opacity-50 bg-dark"
+        onClose={handleClose}
+      >
+        <div className="fixed inset-0 z-10 overflow-y-auto bg-opacity-50 bg-dark">
+          <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+            <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-sm">
+              <div className="bg-white p-4 sm:p-4">
+                <div className=" sm:flex sm:items-start">
+                  <div className="mt-3 text-center sm:mt-0 sm:text-left w-[100%]">
+                    <Dialog.Title
+                      as="h3"
+                      className="px-4 text-lg font-medium leading-6"
+                    >
+                      {currentEl ? "Edit record" : "New record"}
+                    </Dialog.Title>
+                    <div className="mt-2">
+                      <form
+                        onSubmit={(e) => e.preventDefault()}
+                        className="flex flex-col max-w-md px-4 mx-auto"
+                      >
+                        <input
+                          type="text"
+                          name="name"
+                          placeholder="Name task"
+                          defaultValue={currentName}
+                          onChange={handleChange}
+                          className="block w-full px-3 py-2 text-gray-500 border rounded-md outline-none focus:bg-white focus:border-indigo-600 mb-[10px]"
+                        />
+                        <select
+                          className="w-full p-2.5 text-gray-500 bg-white border rounded-md shadow-sm outline-none appearance-none focus:border-indigo-600 mb-[10px]"
+                          name="category"
+                          defaultValue={currentCategory}
+                          onChange={handlerSelect}
+                        >
+                          <option>Task</option>
+                          <option>Random Thought</option>
+                          <option>Idea</option>
+                          <option>Quote</option>
+                        </select>
+                        <input
+                          type="text"
+                          name="content"
+                          placeholder="Content"
+                          defaultValue={currentContent}
+                          onChange={handleChange}
+                          className="block w-full px-3 py-2 text-gray-500 border rounded-md outline-none focus:bg-white focus:border-indigo-600 mb-[10px]"
+                        />
+                        <input
+                          type="text"
+                          name="expDate"
+                          placeholder="Dates"
+                          defaultValue={currentDate}
+                          onChange={handleChange}
+                          className="block w-full px-3 py-2 text-gray-500 border rounded-md outline-none focus:bg-white focus:border-indigo-600"
+                        />
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="bg-gray-50 px-4 py-5 justify-between sm:flex sm:flex-row sm:justify-around sm:px-6 items-center">
+                <RenderButton text="Cancel" onClick={handleClose} />
+                <RenderButton text="Save" onClick={onClickSave} />
+              </div>
+            </Dialog.Panel>
+          </div>
+        </div>
+      </Dialog>
+    </Transition.Root>
   );
 };
