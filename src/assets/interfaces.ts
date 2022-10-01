@@ -14,3 +14,9 @@ export interface State {
   isArch: boolean;
   currentEl: ToDoRecord;
 }
+
+export interface IArgsTableEl {
+  header: boolean;
+  typeTab: string;
+  data: { data: string[]; id: string };
+}
